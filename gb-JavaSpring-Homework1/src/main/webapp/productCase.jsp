@@ -6,7 +6,7 @@
     <title>productCase</title>
 </head>
 <body>
-<h1>We collect for you this productCase:</h1>
+<h1>We collect for you such productCase:</h1>
 <hr>
 <ul>
     <% for (Product product: (ArrayList<Product>)request.getAttribute("productCase")) { %>

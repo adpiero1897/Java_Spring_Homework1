@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 @WebServlet(name = "ProductServlet", urlPatterns = "/product")
 public class ProductServlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(HttpServletExercise.class);
 
     private List<Product> products = List.of(
             Product.builder().id(1).title("apple").cost(30.5F).isVegan(true).build(),
