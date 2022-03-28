@@ -11,9 +11,13 @@ import java.util.List;
 import java.util.Random;
 
 import Goods.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @WebServlet(name = "ProductServlet", urlPatterns = "/product")
 public class ProductServlet extends HttpServlet {
+
+    private static Logger logger = LoggerFactory.getLogger(HttpServletExercise.class);
 
     private List<Product> products = List.of(
             Product.builder().id(1).title("apple").cost(30.5F).isVegan(true).build(),
@@ -44,11 +48,11 @@ public class ProductServlet extends HttpServlet {
         Random rand = new Random();
         ArrayList<Product> productCase = new ArrayList<>();
 
-        Product product = products.get(rand.nextInt(14));
 
         for (int i = 0; i < 10; ) {
+            Product product = products.get(rand.nextInt(14));
             //Если продукт не веганский, а нужен веганский набор, то не кладем его
-            if (!(param == "1" && !product.getIsVegan())) {
+            if (!(param.equals("1") && !product.getIsVegan())) {
                 productCase.add(product);
                 i++;
             }
