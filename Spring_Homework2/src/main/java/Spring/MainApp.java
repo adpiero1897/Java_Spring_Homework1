@@ -16,7 +16,7 @@ public class MainApp {
         Cart cart = context.getBean("cart", Cart.class);
         ProductRepository productRepository = context.getBean("productRepository", ProductRepository.class);
         MessageRender messageRender = context.getBean("consoleMessageRender", MessageRender.class);
-        MessageProvider messageProvider = context.getBean("consoleMessageRender", MessageProvider.class);
+        MessageProvider messageProvider = context.getBean("consoleMessageProvider", MessageProvider.class);
 
         while (true) {
             messageRender.render();
@@ -34,15 +34,30 @@ public class MainApp {
                 }
             } else if (str.equalsIgnoreCase("new Cart")) {
                 cart = context.getBean("cart", Cart.class);
+                messageRender.setCart(cart);
+                messageProvider.setCart(cart);
+                messageRender.render("Взяли новую корзину");
             } else if (str.equalsIgnoreCase("exit")) {
                 System.exit(100);
             } else {
                 int i = Integer.parseInt(str);
+
                 if (i >= 0) {
-                    Product product = productRepository.getProductForId(i);
-                    cart.addProduct(product);
+                    if(i<=productRepository.getMaxId()) {
+                        Product product = productRepository.getProductForId(i);
+                        cart.addProduct(product);
+                        messageRender.render("Добавили в корзину продукт " + product.getTitle());
+                    }
+                    else {
+                        messageRender.render("Товар для добавления с данным id НЕ найден");
+                    }
                 } else{
-                    cart.removeProductForId(i);
+                    if(-i<=cart.getMaxId()) {
+                        messageRender.render("Удаляем из корзины продукт " + cart.getProductForId(-i).getTitle());
+                        cart.removeProductForId(-i);
+                    }else{
+                        messageRender.render("Товар для удаления с данным id НЕ найден");
+                    }
                 }
 
             }

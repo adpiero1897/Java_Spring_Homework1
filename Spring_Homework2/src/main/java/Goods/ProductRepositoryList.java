@@ -22,7 +22,7 @@ public class ProductRepositoryList implements ProductRepository {
 
     @Override
     public void removeProductForId(int id) {
-        productList.remove(IdInCart);
+        productList.remove(id);
     }
 
     @Override

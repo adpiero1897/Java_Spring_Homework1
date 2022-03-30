@@ -6,6 +6,8 @@ import Goods.ProductRepository;
 import Goods.ProductRepositoryList;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+
 
 @Configuration
 public class AppConfig {
@@ -31,6 +33,7 @@ public class AppConfig {
     }
 
     @Bean(name = "cart")
+    @Scope("prototype")
     public Cart cart(ProductRepository productRepository) {
         Cart cart = new Cart();
         //Заполним изначально корзину 5 разными (НЕвеганскими) товарами
