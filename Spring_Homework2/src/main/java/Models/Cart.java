@@ -1,4 +1,4 @@
-package Goods;
+package Models;
 
 public class Cart extends ProductRepositoryList {
 
